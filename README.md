@@ -2,53 +2,54 @@
 
 Prometheus node exporter, image is based on the Alpine base image with 0 vulnerabilities.
 
-## Current Docker image (~25.2MB)
+## Current Docker image (~24.8MB)
 
 Security scanning using Clair
 ```
-clair-scanner secureimages/node-exporter:1.0.1-alpine-3.12.3
-2021/01/11 09:10:03 [INFO] ▶ Start clair-scanner
-2021/01/11 09:10:03 [INFO] ▶ Server listening on port 9279
-2021/01/11 09:10:03 [INFO] ▶ Analyzing 239a994d90a30d28d70001f62415dabc8636df0ebb561fe4d6c1b4b1d4a6cbcf
-2021/01/11 09:10:03 [INFO] ▶ Analyzing 2e5af126645ea86de0bc8e5c2f61af0b597d64c4e3bf4caa29361070376b12ce
-2021/01/11 09:10:03 [INFO] ▶ Image [secureimages/node-exporter:1.0.1-alpine-3.12.3] contains NO unapproved vulnerabilities
+clair-scanner secureimages/node-exporter:1.1.1-alpine-3.13.2
+2021/02/20 11:00:29 [INFO] ▶ Start clair-scanner
+2021/02/20 11:00:29 [INFO] ▶ Server listening on port 9279
+2021/02/20 11:00:29 [INFO] ▶ Analyzing b73bac2fe5a7b9d1abcbf0138798281e20b11e59b4605b104d38e914fa35b4d2
+2021/02/20 11:00:29 [INFO] ▶ Analyzing 0fba02a171c9aa6418e9d978da8011c1c1da36abc83eb34e679ab4036408c5cb
+2021/02/20 11:00:29 [WARN] ▶ Image [secureimages/node-exporter:1.1.1-alpine-3.13.2] contains 1 total vulnerabilities
+2021/02/20 11:00:29 [ERRO] ▶ Image [secureimages/node-exporter:1.1.1-alpine-3.13.2] contains 1 unapproved vulnerabilities
 ```
 
 Security scanning using Trivy
 ```
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro aquasec/trivy:0.15.0 --no-progress secureimages/node-exporter:1.0.1-alpine-3.12.3
-2021-01-11T09:10:10.364Z        INFO    Need to update DB
-2021-01-11T09:10:10.364Z        INFO    Downloading DB...
-2021-01-11T09:10:15.283Z        INFO    Detecting Alpine vulnerabilities...
-2021-01-11T09:10:15.283Z        INFO    Trivy skips scanning programming language libraries because no supported file was detected
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro aquasec/trivy:0.16.0 --no-progress secureimages/node-exporter:1.1.1-alpine-3.13.2
+2021-02-20T11:00:34.562Z        INFO    Need to update DB
+2021-02-20T11:00:34.562Z        INFO    Downloading DB...
+2021-02-20T11:00:37.392Z        INFO    Detecting Alpine vulnerabilities...
+2021-02-20T11:00:37.393Z        INFO    Trivy skips scanning programming language libraries because no supported file was detected
 
-secureimages/node-exporter:1.0.1-alpine-3.12.3 (alpine 3.12.3)
+secureimages/node-exporter:1.1.1-alpine-3.13.2 (alpine 3.13.2)
 ==============================================================
 Total: 0 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0)
 ```
 
-## Official Docker image (~26.4MB)
+## Official Docker image (~26MB)
 
 [https://hub.docker.com/r/prom/node-exporter](https://hub.docker.com/r/prom/node-exporter)
 ```
-docker pull prom/node-exporter:v1.0.1
+docker pull prom/node-exporter:v1.1.1
 ```
 
 Security scanning using Clair
 ```
-clair-scanner prom/node-exporter:v1.0.1
-2021/01/11 09:10:20 [INFO] ▶ Start clair-scanner
-2021/01/11 09:10:21 [INFO] ▶ Server listening on port 9279
-2021/01/11 09:10:21 [INFO] ▶ Analyzing 04106bf59785d26ccb59b69d3d4b5b254e32d0bc9c2cc2903125999d72e559b8
-2021/01/11 09:10:21 [INFO] ▶ Analyzing 5503dd10d07baef7c42c9565b227c1500336ae00103dccf1d1820cab61c2eedb
-2021/01/11 09:10:21 [INFO] ▶ Analyzing c720068c37a615cc09cb7b327f30ac6b94e468bb8553a18732e5c50644e7ab00
+clair-scanner prom/node-exporter:v1.1.1
+2021/02/20 11:00:46 [INFO] ▶ Start clair-scanner
+2021/02/20 11:00:47 [INFO] ▶ Server listening on port 9279
+2021/02/20 11:00:47 [INFO] ▶ Analyzing 5bb40584ed3ac0415fd66dcd3b7787aaba0e9f1e7c32fe7ca43cc6c278707efc
+2021/02/20 11:00:47 [INFO] ▶ Analyzing f6ca65812b208b446db59376f6417ce4b990453832b0f996c33f10084759da6f
+2021/02/20 11:00:47 [INFO] ▶ Analyzing 6288429be43c190fae97e599b625eb1be3cef582adc65d8759da914440b98ecb
 ```
 
 Security scanning using Trivy
 ```
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro aquasec/trivy:0.15.0 --no-progress prom/node-exporter:v1.0.1
-2021-01-11T09:10:27.674Z        INFO    Need to update DB
-2021-01-11T09:10:27.674Z        INFO    Downloading DB...
-2021-01-11T09:10:33.134Z        WARN    OS is not detected and vulnerabilities in OS packages are not detected.
-2021-01-11T09:10:33.134Z        INFO    Trivy skips scanning programming language libraries because no supported file was detected
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro aquasec/trivy:0.16.0 --no-progress prom/node-exporter:v1.1.1
+2021-02-20T11:00:52.801Z        INFO    Need to update DB
+2021-02-20T11:00:52.801Z        INFO    Downloading DB...
+2021-02-20T11:00:55.941Z        WARN    OS is not detected and vulnerabilities in OS packages are not detected.
+2021-02-20T11:00:55.941Z        INFO    Trivy skips scanning programming language libraries because no supported file was detected
 ```
